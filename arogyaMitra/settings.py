@@ -134,8 +134,16 @@ SOCIALACCOUNT_ADAPTER = "userprofile.adapters.CustomSocialAccountAdapter"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'nCuAUgBnnWSWkyhaIcBNTgHlyjdiHZZL',
+        'HOST': 'centerbeam.proxy.rlwy.net',
+        'PORT': '41611',
+    }
 }
+
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
