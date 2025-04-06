@@ -258,6 +258,34 @@ def update_address(request):
     context = {"address": address.first()}
     return redirect('edit_profile')
 
+def add_address(request):
+    user = request.user
+
+    if request.method == "POST":
+        houseNo = request.POST.get("houseNo")
+        street_address = request.POST.get("street_address")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        country = request.POST.get("country")
+        postal_code = request.POST.get("postal_code")
+        is_default = request.POST.get("is_default") == "on"
+
+        UserAddress.objects.create(  # ✅ Fix: use the model manager
+            user=user,
+            houseNo=houseNo,
+            street_address=street_address,
+            city=city,
+            state=state,
+            country=country,
+            postal_code=postal_code,
+            is_default=is_default,
+        )
+
+        messages.success(request, "Address added successfully!")
+        return redirect("profile")
+
+    return redirect('edit_profile')  # You can add context here if needed
+
 def create_family_member(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -277,3 +305,63 @@ def create_family_member(request):
         return redirect("profile")  # Redirect to profile page after creation
 
     return redirect("profile")  
+
+@login_required
+def update_vitals(request):
+    user = request.user
+    try:
+        vitals = PatientVital.objects.get(user=user)
+    except PatientVital.DoesNotExist:
+        messages.error(request, "Vital record not found.")
+        return redirect('profile')  # or wherever
+
+    if request.method == "POST":
+        vitals.blood_pressure_systolic = request.POST.get("blood_pressure_systolic")
+        vitals.blood_pressure_diastolic = request.POST.get("blood_pressure_diastolic")
+        vitals.heart_rate = request.POST.get("heart_rate")
+        vitals.glucose = request.POST.get("glucose")
+        vitals.cholesterol = request.POST.get("cholesterol")
+        vitals.weight = request.POST.get("weight")
+        vitals.height = request.POST.get("height")
+        vitals.save()
+
+        messages.success(request, "Vitals updated successfully.")
+        return redirect("profile")  # or any page
+
+    return render(request, "userprofile/editProfile.html")
+
+@login_required
+def create_medical_info(request):
+    if request.method == "POST":
+        blood_group = request.POST.get("blood_group")
+        systolic = request.POST.get("blood_pressure_systolic")
+        diastolic = request.POST.get("blood_pressure_diastolic")
+        heart_rate = request.POST.get("heart_rate")
+        glucose = request.POST.get("glucose")
+        cholesterol = request.POST.get("cholesterol")
+        weight = request.POST.get("weight")
+        height = request.POST.get("height")
+
+        # Set a valid birth date; modify as needed based on your data model
+        birth_date = request.user.birth_date if hasattr(request.user, 'birth_date') else None
+        if not birth_date:
+            messages.error(request, "Birth date is required.")
+            return redirect("create_vitals")
+
+        PatientVital.objects.create(
+            user=request.user,
+            birth_date=birth_date,
+            blood_group=blood_group,
+            blood_pressure_systolic=systolic,
+            blood_pressure_diastolic=diastolic,
+            heart_rate=heart_rate,
+            glucose=glucose,
+            cholesterol=cholesterol,
+            weight=weight,
+            height=height,
+        )
+
+        messages.success(request, "Medical info created successfully.")
+        return redirect("profile")  # or your desired page
+
+    return render(request, "userprofile/editProfile.html")

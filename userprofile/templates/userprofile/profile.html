@@ -14,7 +14,7 @@
     </div>
     <div class="nav-box">
         <a href="{% url 'profile' %}" class="nav-item selected">profile</a>
-        <a href="" class="nav-item">reports</a>
+        <a href="{% url 'reports' %}" class="nav-item">reports</a>
         <a href="{% url 'bookings' %}" class="nav-item">bookings</a>
         <a href="{% url 'contact' %}" class="nav-item">contact-us</a>
     </div>
@@ -22,11 +22,15 @@
     <div class="nav-box">
         <a href="#"><img class="profile_pic" src="{{ user.profile_image.url }}" alt="profile_pic"></a>
     </div>
+    {% elif user.is_authenticated %}
+    <div class="nav-box">
+        <a href="{% url 'login' %}"><img class="profile_pic" src="{{ user.avatar }}"
+                alt="profile_pic"></a>
+    </div>
     {% else %}
     <div class="nav-box">
         <a href="{% url 'login' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
                 alt="profile_pic"></a>
-    </div>
     {% endif %}
 </nav>
 {% endblock 'navbar' %}
@@ -107,6 +111,10 @@
                         <div class="profileImg">
                             <img id="profilePicture" src="{{ user.profile_image.url }}" alt="Profile Picture">
                         </div>
+                        {% elif user.avatar %}
+                        <div class="profileImg">
+                            <img id="profilePicture" src="{{ user.avatar }}" alt="Profile Picture">
+                        </div>
                         {% else %}
                         <div class="profileImg">
                             <img id="profilePicture" src="{% static 'images/default_user.png' %}" alt="Profile Picture">
@@ -122,17 +130,22 @@
                         {% endif %}
                         <div class="userName">
                             <div class="honour">
-                                {% if user.user_gender == 'M' %}
+                                {% if user.user_gender == 'Male' %}
                                 <p style="color: black;">Mr.</p>
-                                {% else %}
+                                {% elif user.user_gender == 'Female' %}
                                 <p style="color: black;">Mrs.</p>
+                                {% else %}
+                                <p style="color: black;"></p>
                                 {% endif %}
                             </div>
                             <div class="Fname">{{ user.first_name}}</div>
                             <div class="Lname">{{ user.last_name}}</div>
                         </div>
                         <div class="userEmail">{{ user.email}}</div>
-                        <a href="{% url 'edit_profile' %}" class="editProfile">Edit Profile</a>
+                        <div class="actions" style="display: flex; gap: 1vw;">
+                            <a href="{% url 'edit_profile' %}" class="editProfile">Edit Profile</a>
+                            <a href="{% url 'logout' %}" class="editProfile">Logout</a>
+                        </div>
                     </div>
                     <div class="divider"></div>
                     <div class="userInfo">
