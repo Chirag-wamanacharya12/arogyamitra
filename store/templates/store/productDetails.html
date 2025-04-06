@@ -1,0 +1,285 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'extra_head' %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'styles/viewProduct.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/prodDetails.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/bootstrap/css/bootstrap-grid.min.css'%}">
+{% endblock 'extra_head' %}
+{% block 'title' %}
+<title>arogyamitra | store</title>
+{% endblock 'title' %}
+{% block 'navbar' %}
+<nav class="storeNav">
+    <div class="nav-logo">
+        <a href="{% url 'home' %}"><img src="{% static 'images\Arogya.jpg' %}" alt=""></a>
+    </div>
+    {% if user.is_authenticated and user.user_type == "service_provider"%}
+    <div class="location-bar">
+        <div class="bar-title">Manage inventory</div>
+        <div class="locationBlock">
+            <a href='{% url "add_product" %}' class="locationText">add Products</a>
+            <div class="locationArrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="location-bar">
+        <div class="bar-title">Delivery in 8 minutes</div>
+        <div class="locationBlock">
+        {% if address %}
+            <div class="locationText">{{ address.city }},{{ address.state }} - {{ address.postal_code }}</div>
+        {% else %}
+            <div class="locationText">Add your address</div>
+        {% endif %}
+            <div class="locationArrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="searchBox">
+        <a href="#" class="search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+            <form action="#" method="post" class="searchInput">
+                <input type="search" name="search" id="" placeholder="Search for 'Facewash' ">
+            </form>
+        </a>
+    </div>
+    
+    {% if user.is_authenticated%}
+    <div class="account">
+        <div class="profileButton">{{user.username}}</div>
+        <div class="profileArrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+        </div>
+    </div>
+    {% else %}
+    <div class="account">
+        <a class="profileButton" href="{% url 'login' %}">login</a>
+    </div>
+    {% endif %}
+    <div class="cart">
+        <a class="cartButton" href="{% url 'cart' %}" style="text-decoration: none;">
+            <div class="cartButtonIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                </svg>
+            </div>
+            <div class="cartButtonText">My cart</div>
+        </a>
+    </div>
+</nav>
+{% endblock 'navbar' %}
+{% block 'main' %}
+    <div class="detailsContainer">
+        {% if product %}
+            <div class="imageContainer">
+                <div class="container">
+                    <!-- Main Image -->
+                    <div class="main-image">
+                        <img id="mainImage" src="{{ product_images.0 }}" alt="Product Image">
+                    </div>
+                    <!-- Thumbnails -->
+                    <div class="thumbnail-container">
+                        {% for image in product_images %}
+                            <div class="thumbnail">
+                                <img src="{{ image }}" onclick="changeImage('{{ image }}')" class="{% if forloop.first %}active{% endif %}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="infoContainer">
+                <div class="productTitle">{{ product.title}}</div>
+                <div class="brand" style="color: rgb(1, 107, 58);">Brand : {{ product.brand_name }}</div>
+                <div class="pricingOffer">
+                    {% if pricing %}
+                        {% for price in pricing %}
+                            <div class="offer"><p><i class="bi bi-dash"></i></p><p>{{ price.offer }}%</p></div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="price">
+                        <p>₹</p>
+                        <p>{{ integer_part }}</p>
+                        <p>{{ decimal_part }}</p>
+                        <p>(₹ {{ pricePerUnit }} / Count )</p>
+                    </div>
+                </div>
+                {% if pricing %}
+                    {% for price in pricing %}
+                        <div class="orgPriceContainer">MRP <i class="bi bi-dash"></i><p>{{ price.price }}</p></div>
+                    {% endfor %}
+                {% endif %}
+                <div class="taxInfo">Inclusive of all taxes</div>
+                <div class="policies">
+                    <div class="payOnDelivery">
+                        <div class="icon">
+                            <img src="{% static 'images\icons\payment-icon.svg'%}">
+                        </div>
+                        <div class="msg"><p>Pay on delivery</p></div>
+                    </div>
+                    <div class="refund">
+                        {% if product.is_refundable %}
+                        <div class="refundIcon">
+                            <div class="icon">
+                                <img src="{% static 'images\icons\return-product-icon.svg'%}" alt="refundable">
+                            </div>
+                            <div class="msg"><p>returnable</p></div>
+                        </div>
+                        {% else %}
+                        <div class="refundIcon">
+                            <div class="icon">
+                                <img src="{% static 'images\icons\delivery-truck.svg'%}" alt="refundable">
+                            </div>
+                            <div class="msg"><p>Non</p> returnable</div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="guides">
+                    {% for guide in guides %}
+                    <ul class="guideDataList">
+                        <li class="guideDataTitle"><strong>Directions to Use:</strong>
+                            <ul class="guideDataSubList">
+                                {% for line in guide.direction_to_use %}
+                                    <li class="guideData">{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        
+                        <li class="guideDataTitle"><strong>Directions to Store:</strong>
+                            <ul class="guideDataSubList">
+                                {% for line in guide.direction_to_store %}
+                                    <li class="guideData">{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                {% endfor %}
+                
+                </div>
+            </div>
+            {% for price in pricing %}
+                <div class="productSummery">
+                    <div class="price" >
+                        <p>₹</p>
+                        <p id="integer_part">{{ integer_part }}</p>
+                        <p id="decimal_part">{{ decimal_part }}</p>
+                        <p>(₹ {{ pricePerUnit }} / Count )</p>
+                    </div>
+                    <div class="rating"><i class="bi bi-star-fill" style="color: rgb(255, 187, 15);"></i>  {{ product.rating }}</div>
+                    <div class="description">{{ product.description }}</div>
+                    <div class="delivery">
+                        <p><a href="#" style="color: rgb(29, 117, 250);">FREE delivery</a>{{ delDate }}, on your first order</p>
+                    </div>
+                    {% if address %}
+                    <div class="location" style="display: flex; align-items: center;"><i class="bi bi-geo-alt"></i><a href="#" style="font-size: 0.8rem;">Deliver to {{ user.first_name }} - {{ address.city }} {{ address.postal_code }}</a></div>
+                    {% else %}
+                    <div class="location"><a href="#">Add your address</a></div>
+                    {% endif %}
+                    <div class="stock">
+                        <h2 style="font-size: 1.2rem;"> In Stock </h2>
+                        <div class="securePay">
+                            <p>Payment :</p>
+                            <a href="#" id="secureTransaction">secure transaction</a>
+                            <div id="tooltip" class="tooltip">
+                                <button class="close-btn">&times;</button>
+                                <strong>Your transaction is secure</strong>
+                                <p>We work hard to protect your security and privacy. Our payment security system encrypts your information during transmission.</p>
+                                <p>We don’t share your credit card details with third-party sellers, and we don’t sell your information to others. <a href="#">Learn more</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="securePay"><p>Refund  : </p><a href="#" >view refund policy</a></div>
+                        <div class="securePay"><p>Shipped by  : Arogya mitra </div>
+                    </div>
+                    {% if quantity %}
+                    <div class="quantity">
+                        <p> Already in cart </p>
+                        <label for="quantitySelect" >Quantity:</label>
+                        <select id="quantitySelect" data-current-quantity="{{ quantity }}">
+                            <option value="{{ quantity }}">{{ quantity }}</option>
+                        </select>
+                    </div>
+                    {% else %}
+                    <div class="quantity">
+                        <label for="quantitySelect" >Quantity:</label>
+                        <select id="quantitySelect">
+                            
+                        </select>
+                    </div>
+                    {% endif %}
+                    <div class="callToActionButtons">
+                        <div id="product_info" data-product-id="{{ product.id }}" data-pricing-id="{{ pricing.id }}"></div>
+                        <a href="{% url 'addToCart' product.id %}" class="addToCartButton" >Add to cart</a>
+                        <button type="submit" class="buyNowButton" id="custom-pay-btn">Buy now</button>
+                        <div id="paypal-container" style="display: none;"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="recommendedProdContainer"></div>
+    <div class="reviewsContainer"></div>
+    {% endblock 'main' %}
+    {% block 'footer' %}
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We are committed to providing reliable health information and services.</p>
+                <p>&copy; 2024 Health Portal</p>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="file:///F:/fullstack%20projects/health%20portal/Tools_&_Calculator/BMI_Calculator/BMI_Calc.html">Services</a></li>
+                    <li><a href="#book_Appointment">Appointments</a></li>
+                    <li><a href="file:///F:/fullstack%20projects/health%20portal/store/store-contact-us/contact-us.html">Contact Us</a></li>
+                    <li><a href="file:///F:/fullstack%20projects/health%20portal/FAQ/index.html">FAQ</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: support@healthportal.com</p>
+                <p>Phone: +1 (234) 567-8901</p>
+                <p>Address: 123 Health St, Wellness City, HC 12345</p>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-media">
+                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/posts/chirag-wamanacharya-a3ab6b255_health-wellness-goodhealth-activity-7242222974605373442-p55B?utm_source=share&utm_medium=member_android" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>Privacy Policy | Terms of Service | Disclaimer</p>
+        </div>
+    </footer>
+    {% endblock 'footer' %}
+    {% block 'script' %}
+    <script src="https://www.paypal.com/sdk/js?client-id=AfurbXcGEoGZk4A27ipKRiutIPJ3_RdUtkxrGoCGBYaL3KFYXov9e5XnVOOZLDtWt6-MPv_2bT91QA0U&currency=USD"></script>
+
+    <script src="{% static 'scripts/productPage.js' %}"></script>
+    <script src="{% static 'styles/bootstrap/js/bootstrap.min.js' %}"></script>
+    {% endblock 'script' %} 

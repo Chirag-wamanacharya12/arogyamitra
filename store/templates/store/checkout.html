@@ -1,0 +1,126 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'extra_head' %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'styles/cart.css'%}">
+{% endblock 'extra_head' %}
+{% block 'title' %}
+<title>arogyamitra | store</title>
+{% endblock 'title' %}
+{% block 'navbar' %}
+<nav class="storeNav">
+    <div class="nav-logo">
+        <a href="{% url 'store' %}"><img src="{% static 'images\Arogya.jpg' %}" alt=""></a>
+    </div>
+    {% if user.is_authenticated and user.user_type == "service_provider"%}
+    <div class="location-bar">
+        <div class="bar-title">Manage inventory</div>
+        <div class="locationBlock">
+            <a href='{% url "add_product" %}' class="locationText">add Products</a>
+            <div class="locationArrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="location-bar">
+        <div class="bar-title">Delivery in 8 minutes</div>
+        <div class="locationBlock">
+            <div class="locationText">New York, United States</div>
+            <div class="locationArrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="searchBox">
+        <a href="#" class="search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+            <form action="#" method="post" class="searchInput">
+                <input type="search" name="search" id="" placeholder="Search for 'Facewash' ">
+            </form>
+        </a>
+    </div>
+    
+    {% if user.is_authenticated%}
+    <div class="account">
+        <div class="profileButton">{{user.username}}</div>
+        <div class="profileArrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+        </div>
+    </div>
+    {% else %}
+    <div class="account">
+        <a class="profileButton" href="{% url 'login' %}">login</a>
+    </div>
+    {% endif %}
+    <div class="cart">
+        <a href="#"><div class="cartButton">
+            <div class="cartButtonIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                </svg>
+            </div>
+            <div class="cartButtonText">My cart</div>
+        </div></a>
+    </div>
+</nav>
+{% endblock 'navbar' %}
+{% block 'main' %}
+
+
+{% endblock 'main' %}
+{% block 'footer' %}
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>We are committed to providing reliable health information and services.</p>
+            <p>&copy; 2024 Health Portal</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/Tools_&_Calculator/BMI_Calculator/BMI_Calc.html">Services</a></li>
+                <li><a href="#book_Appointment">Appointments</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/store/store-contact-us/contact-us.html">Contact Us</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/FAQ/index.html">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: support@healthportal.com</p>
+            <p>Phone: +1 (234) 567-8901</p>
+            <p>Address: 123 Health St, Wellness City, HC 12345</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-media">
+                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/posts/chirag-wamanacharya-a3ab6b255_health-wellness-goodhealth-activity-7242222974605373442-p55B?utm_source=share&utm_medium=member_android" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Privacy Policy | Terms of Service | Disclaimer</p>
+    </div>
+</footer>
+{% endblock 'footer' %}
+{% block 'script' %}
+    <script src="{% static 'scripts/cart.js' %}"></script>
+{% endblock 'script' %}
