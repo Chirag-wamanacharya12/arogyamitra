@@ -1,0 +1,432 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'extra_head' %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock 'extra_head' %}
+{% block 'title' %}
+<title>arogyamitra | home</title>
+{% endblock 'title' %}
+{% block 'navbar' %}
+<nav class="home-nav">
+    <div class="nav-box">
+        <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/Arogya.jpg' %}" alt="logo"></a>
+    </div>
+    <div class="nav-box">
+        <a href="{% url 'profile' %}" class="nav-item selected">profile</a>
+        <a href="" class="nav-item">reports</a>
+        <a href="{% url 'bookings' %}" class="nav-item">bookings</a>
+        <a href="{% url 'contact' %}" class="nav-item">contact-us</a>
+    </div>
+    {% if user.is_authenticated and user.profile_image %}
+    <div class="nav-box">
+        <a href="#"><img class="profile_pic" src="{{ user.profile_image.url }}" alt="profile_pic"></a>
+    </div>
+    {% else %}
+    <div class="nav-box">
+        <a href="{% url 'login' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
+                alt="profile_pic"></a>
+    </div>
+    {% endif %}
+</nav>
+{% endblock 'navbar' %}
+{% block 'main' %}
+<div class="profileContainer">
+    <div class="sidebar">
+        {% if FamilyDoctor %}
+        {% for profile in FamilyDoctor %}
+        <div class="familyDoctor">
+            <div class="header">
+                <a class="profileImage" href="#">
+                    <img src="{{ profile.profileImage.url }}" alt="image">
+                </a>
+                <a class="edit" href="#editFamilyDoctor"><img src="{% static 'images\icons\edit.png' %}" alt=""></a>
+            </div>
+            <div class="name">
+                <p class="honour">Dr.</p>
+                <p class="drname">{{ profile.full_name }}</p>
+            </div>
+            <div class="about">
+                <div class="specialization">{{ profile.specialization }}</div>
+                <div class="city">( {{ profile.city }} )</div>
+            </div>
+            <div class="title">
+                <div class="titleItem">Family doctor</div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="familyDoctor skeleton">
+            <div class="profileImage skeleton-box"></div>
+            <div class="name">
+                <p class="skeleton-box" style="width: 120px; height: 20px;"></p>
+            </div>
+            <div class="about">
+                <div class="skeleton-box" style="width: 100px; height: 20px;"></div>
+                <div class="skeleton-box" style="width: 80px; height: 16px;"></div>
+            </div>
+            <div class="title">
+                <div class="skeleton-box" style="width: 140px; height: 20px;"></div>
+            </div>
+            <p class="no-doctor-text">Connect your doctor</p>
+            <a href="#addFamilyDoctor" class="connect-doctor-btn">Add a Family Doctor</a>
+        </div>
+        {% endif %}
+
+        <div class="sidenav">
+            <a href="#Dashboard" class="nav-link"><img src="{% static 'images/icons/home.svg' %}"
+                    class="sidenavItem active">
+                <p>Dashboard</p>
+            </a>
+            <a href="#Profile" class="nav-link"><img src="{% static 'images/icons/profile.svg' %}" class="sidenavItem">
+                <p>Profile</p>
+            </a>
+            <a href="#Family" class="nav-link"><img src="{% static 'images/icons/family.svg' %}" class="sidenavItem">
+                <p>Family</p>
+            </a>
+            <a href="#Medication" class="nav-link"><img src="{% static 'images/icons/medication.svg' %}"
+                    class="sidenavItem">
+                <p>Medication</p>
+            </a>
+        </div>
+        <div class="membership">
+            <div class="timeleft">
+                <p>{{ member.days }}</p>
+                <p>Days Left</p>
+            </div>
+            <p>Extend your membership</p>
+            <a href="#" class="check">Check now</a>
+        </div>
+    </div>
+    <div class="main">
+        <section id="Dashboard">
+            <div class="generalInfo">
+                <div class="profileInfo">
+                    <div class="info">
+                        {% if user.profile_image %}
+                        <div class="profileImg">
+                            <img id="profilePicture" src="{{ user.profile_image.url }}" alt="Profile Picture">
+                        </div>
+                        {% else %}
+                        <div class="profileImg">
+                            <img id="profilePicture" src="{% static 'images/default_user.png' %}" alt="Profile Picture">
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_image' %}">
+                                {% csrf_token %}
+                                <label for="profileUpload" class="uploadIcon">
+                                    <img src="{% static 'images/icons/upload.svg' %}" alt="Upload Icon">
+                                </label>
+                                <input type="file" id="profileUpload" name="profile_image" accept="image/*"
+                                    style="display: none;" onchange="previewAndSubmit()">
+                            </form>
+                        </div>
+                        {% endif %}
+                        <div class="userName">
+                            <div class="honour">
+                                {% if user.user_gender == 'M' %}
+                                <p style="color: black;">Mr.</p>
+                                {% else %}
+                                <p style="color: black;">Mrs.</p>
+                                {% endif %}
+                            </div>
+                            <div class="Fname">{{ user.first_name}}</div>
+                            <div class="Lname">{{ user.last_name}}</div>
+                        </div>
+                        <div class="userEmail">{{ user.email}}</div>
+                        <a href="{% url 'edit_profile' %}" class="editProfile">Edit Profile</a>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="userInfo">
+                        {% if vitals %}
+                        {% for vital in vitals %}
+                        <div class="privateInfo">
+                            <div class="sex">Sex: <p>{{ user.user_gender }}</p>
+                            </div>
+                            <div class="age">Age: <p>{{ vital.age }}</p>
+                            </div>
+                            <div class="bloodGroup">Blood Group: <p>{{ vital.blood_group }}</p>
+                            </div>
+                        </div>
+                        <div class="publicInfo">
+                            <div class="bloodGroup">Blood Group: <p>{{ vital.blood_group }}</p>
+                            </div>
+                            <div class="bp">Blood Pressure: <p>{{ vital.blood_pressure_systolic }}/{{vital.blood_pressure_diastolic }} mmHg</p>
+                            </div>
+                            <div class="heartRate">Heart Rate: <p>{{ vital.heart_rate }} BPM</p>
+                            </div>
+                        </div>
+                        <div class="publicInfo">
+                            <div class="glucose">Glucose: <p>{{ vital.glucose }} mg/dL</p>
+                            </div>
+                            <div class="cholesterol">Cholesterol: <p>{{ vital.cholesterol }} mg/dL</p>
+                            </div>
+                            <div class="bmi">BMI: <p>{{ vital.bmi }} ( {{ bmi_category }} )</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>No vitals recorded.</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="Profile">
+            <div class="myorders">
+                <div class="listHead">
+                    <div class="listHeadItem">sr.no</div>
+                    <div class="listHeadItem">product</div>
+                    <div class="listHeadItem">Date</div>
+                    <div class="listHeadItem">Total</div>
+                    <div class="listHeadItem">Status</div>
+                </div>
+                {% for order in myorders %}
+                <div class="listBody">
+                    <div class="listHeadItem">{{ order.id }}</div>
+                    <div class="listHeadItem">{{ order.product.name }}</div>
+                    <div class="listHeadItem">{{ order.ordered_at }}</div>
+                    <div class="listHeadItem">{{ order.total_price }}</div>
+                    <div class="listHeadItem">{{ order.order_status }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section id="Family">
+            {% if Family %}
+            <div class="table">
+                <div class="table-header">
+                    <div class="table-header-item">Name</div>
+                    <div class="table-header-item">Relationship</div>
+                    <div class="table-header-item">Date of Birth</div>
+                    <div class="table-header-item">Gender</div>
+                    <div class="table-header-item">Contact Number</div>
+                </div>
+                <div class="table-body">
+                    {% for member in Family %}
+                    <div class="table-row">
+                        <div class="table-data">{{ member.name }}</div>
+                        <div class="table-data">{{ member.relationship }}</div>
+                        <div class="table-data">{{ member.date_of_birth }}</div>
+                        <div class="table-data">{{ member.gender }}</div>
+                        <div class="table-data">{{ member.contact_number }}</div>
+                    </div>
+                    {% endfor %}
+                    <div class="table-row">
+                        <div class="table-data">
+                            <a href="#addMember" class="addmember">Add Member</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <form id="familyForm" action="{% url 'create_family_member' %}" method="POST">
+                {% csrf_token %}
+                
+                <label>Name:</label>
+                <input type="text" name="name" value="{{ family_member.name }}" required>
+            
+                <label>Relationship:</label>
+                <select name="relationship" required>
+                    <option value="spouse" {% if family_member.relationship == "spouse" %}selected{% endif %}>Spouse</option>
+                    <option value="child" {% if family_member.relationship == "child" %}selected{% endif %}>Child</option>
+                    <option value="parent" {% if family_member.relationship == "parent" %}selected{% endif %}>Parent</option>
+                    <option value="sibling" {% if family_member.relationship == "sibling" %}selected{% endif %}>Sibling</option>
+                    <option value="other" {% if family_member.relationship == "other" %}selected{% endif %}>Other</option>
+                </select>
+            
+                <label>Date of Birth:</label>
+                <input type="date" name="date_of_birth" value="{{ family_member.date_of_birth }}">
+            
+                <label>Gender:</label>
+                <select name="gender" required>
+                    <option value="Male" {% if family_member.gender == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if family_member.gender == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if family_member.gender == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            
+                <label>Contact Number:</label>
+                <input type="text" name="contact_number" value="{{ family_member.contact_number }}" required>
+            
+                <button type="submit">Save</button>
+            </form>            
+            {% endif %}
+        </section>
+        <section id="Medication">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dosage</th>
+                        <th>Schedule</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if medications %}
+                    {% for medication in medications %}
+                    <tr>
+                        <td>{{ medication.name }}</td>
+                        <td>{{ medication.dosage }}</td>
+                        <td>{{ medication.frequency }}</td>
+                        <td>{{ medication.start_date }}</td>
+                        <td>{{ medication.end_date }}</td>
+                        <td>{{ medication.notes }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">No medications recorded for {{ username }}</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </section>
+        <section id="FamilySection">
+            {% if FamilyDoctor %}
+            <div class="addFamilyDoctor" id="editFamilyDoctor">
+                {% for doctor in FamilyDoctor %}
+                <form method="POST" action="{% url 'editFamilyDoctor' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-container">
+                        <!-- Left Section -->
+                        <div class="form-section">
+                            <label for="full_name">Full Name:</label>
+                            <input type="text" id="full_name" name="full_name" value="{{ doctor.full_name }}" required>
+
+                            <label for="phone">Phone:</label>
+                            <input type="text" id="phone" name="phone" value="{{ doctor.phone }}" required>
+
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="{{ doctor.email }}" required>
+
+                            <label for="specialization">Specialization:</label>
+                            <input type="text" id="specialization" name="specialization"
+                                value="{{ doctor.specialization }}" required>
+
+                            <label for="clinic_address">Clinic Address:</label>
+                            <textarea id="clinic_address" name="clinic_address"
+                                required>{{ doctor.clinic_address }}</textarea>
+                        </div>
+
+                        <!-- Right Section -->
+                        <div class="form-section">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" value="{{ doctor.city }}" required>
+
+                            <label for="state">State:</label>
+                            <input type="text" id="state" name="state" value="{{ doctor.state }}" required>
+
+                            <label for="zip_code">ZIP Code:</label>
+                            <input type="text" id="zip_code" name="zip_code" value="{{ doctor.zip_code }}" required>
+
+                            <label for="hospital_affiliation">Hospital Affiliation (Optional):</label>
+                            <input type="text" id="hospital_affiliation" name="hospital_affiliation"
+                                value="{{ doctor.hospital_affiliation }}">
+
+                            <label for="years_of_experience">Years of Experience:</label>
+                            <input type="number" id="years_of_experience" name="years_of_experience"
+                                value="{{ doctor.years_of_experience }}" required>
+
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit">Update Details</button>
+                </form>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="addFamilyDoctor" id="addFamilyDoctor">
+                <form method="POST" action="{% url 'addFamilyDoctor' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-container">
+                        <!-- Left Section -->
+                        <div class="form-section">
+                            <label for="full_name">Full Name:</label>
+                            <input type="text" id="full_name" name="full_name" required>
+
+                            <label for="profileImage">Profile Image:</label>
+                            <input type="file" id="profileImage" name="profileImage">
+
+                            <label for="phone">Phone:</label>
+                            <input type="text" id="phone" name="phone" required>
+
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+
+                            <label for="specialization">Specialization:</label>
+                            <input type="text" id="specialization" name="specialization" required>
+
+                            <label for="clinic_address">Clinic Address:</label>
+                            <textarea id="clinic_address" name="clinic_address" required></textarea>
+                        </div>
+
+                        <!-- Right Section -->
+                        <div class="form-section">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" required>
+
+                            <label for="state">State:</label>
+                            <input type="text" id="state" name="state" required>
+
+                            <label for="zip_code">ZIP Code:</label>
+                            <input type="text" id="zip_code" name="zip_code" required>
+
+                            <label for="hospital_affiliation">Hospital Affiliation (Optional):</label>
+                            <input type="text" id="hospital_affiliation" name="hospital_affiliation">
+
+                            <label for="years_of_experience">Years of Experience:</label>
+                            <input type="number" id="years_of_experience" name="years_of_experience" required>
+
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit">Add Family Doctor</button>
+                </form>
+
+            </div>
+            {% endif %}
+
+        </section>
+        <section id="addMember">
+            <form id="familyForm" action="{% url 'create_family_member' %}" method="POST">
+                {% csrf_token %}
+                
+                <label>Name:</label>
+                <input type="text" name="name" value="{{ family_member.name }}" required>
+            
+                <label>Relationship:</label>
+                <select name="relationship" required>
+                    <option value="spouse" {% if family_member.relationship == "spouse" %}selected{% endif %}>Spouse</option>
+                    <option value="child" {% if family_member.relationship == "child" %}selected{% endif %}>Child</option>
+                    <option value="parent" {% if family_member.relationship == "parent" %}selected{% endif %}>Parent</option>
+                    <option value="sibling" {% if family_member.relationship == "sibling" %}selected{% endif %}>Sibling</option>
+                    <option value="other" {% if family_member.relationship == "other" %}selected{% endif %}>Other</option>
+                </select>
+            
+                <label>Date of Birth:</label>
+                <input type="date" name="date_of_birth" value="{{ family_member.date_of_birth }}">
+            
+                <label>Gender:</label>
+                <select name="gender" required>
+                    <option value="Male" {% if family_member.gender == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if family_member.gender == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if family_member.gender == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            
+                <label>Contact Number:</label>
+                <input type="text" name="contact_number" value="{{ family_member.contact_number }}" required>
+            
+                <button type="submit">Save</button>
+            </form>  
+        </section>
+    </div>
+</div>
+{% endblock 'main' %}
+{% block 'script' %}
+<script src="{% static 'scripts/profile.js' %}"></script>
+{% endblock 'script' %}
