@@ -1,0 +1,147 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'extra_head' %}
+<link rel="stylesheet" href="{% static 'styles/bookings.css'%}">
+  <link href='https://unpkg.com/@fullcalendar/core@4.4.1/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/daygrid@4.4.1/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/timegrid@4.4.1/main.min.css' rel='stylesheet' />
+  <script src='https://unpkg.com/@fullcalendar/core@4.4.1/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/interaction@4.4.0/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/daygrid@4.4.1/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/timegrid@4.4.1/main.min.js'></script>
+{% endblock 'extra_head' %}
+{% block 'title' %}
+<title>arogyamitra | Bookings </title>
+{% endblock 'title' %}
+{% block 'navbar' %}
+<nav class="home-nav">
+    <a href="{% url 'home' %}" class="nav-box">
+        <img class="logo" src="{% static 'images/Arogya.jpg' %}" alt="logo">
+    </a>
+    <div class="nav-box">
+        <a href="{% url 'store' %}" class="nav-item">store</a>
+        <a href="" class="nav-item">reports</a>
+        <a href="" class="nav-item selected">bookings</a>
+        <a href="{% url 'contact' %}" class="nav-item">contact-us</a>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="nav-box">
+        <a href="{% url 'profile' %}"><img class="profile_pic" src="{% static 'images/profile.jfif' %}" alt="profile_pic"></a>
+    </div>
+    {% else %}
+    <div class="nav-box">
+        <a href="{% url 'login' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}" alt="profile_pic"></a>
+    </div>
+    {% endif %}
+</nav>
+{% endblock 'navbar' %}
+
+{% block 'main' %}
+<div class="wrapper">
+    <div id='calendar'></div>
+    <div class="container">
+        <h2>Book an Appointment</h2>
+        <form method="POST" action="{% url 'book_appointment' %}">
+            {% csrf_token %}
+            
+            <!-- Section 1: Patient & Doctor Details -->
+            <fieldset>
+                <legend>Patient & Doctor Details</legend>
+                
+                <label for="patient">Patient:</label>
+                <select name="patient" id="patient">
+                    {% for patient in patients %}
+                        <option value="{{ patient.id }}">{{ patient.username }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="doctor">Doctor:</label>
+                <select name="doctor" id="doctor">
+                    {% for doctor in doctors %}
+                        <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+
+            <!-- Section 2: Appointment Details -->
+            <fieldset>
+                <legend>Appointment Details</legend>
+
+                <label for="appointment_date">Appointment Date:</label>
+                <input type="date" id="appointment_date" name="appointment_date" required>
+
+                <label for="appointment_time">Appointment Time:</label>
+                <input type="time" id="appointment_time" name="appointment_time" required>
+
+                <label for="preferred_time_slot">Preferred Time Slot:</label>
+                <select name="preferred_time_slot" id="preferred_time_slot">
+                    {% for slot in time_slots %}
+                        <option value="{{ slot.0 }}">{{ slot.1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="appointment_type">Appointment Type:</label>
+                <select name="appointment_type" id="appointment_type">
+                    <option value="online">Online</option>
+                    <option value="in_person">In-Person</option>
+                </select>
+
+                <label for="appointment_agenda">Appointment Agenda:</label>
+                <textarea id="appointment_agenda" name="appointment_agenda" rows="4"></textarea>
+            </fieldset>
+
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+</div>
+{% endblock 'main' %}
+
+{% block 'footer' %}
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>We are committed to providing reliable health information and services.</p>
+            <p>&copy; 2024 Health Portal</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/Tools_&_Calculator/BMI_Calculator/BMI_Calc.html">Services</a></li>
+                <li><a href="#book_Appointment">Appointments</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/store/store-contact-us/contact-us.html">Contact Us</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/FAQ/index.html">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: support@healthportal.com</p>
+            <p>Phone: +1 (234) 567-8901</p>
+            <p>Address: 123 Health St, Wellness City, HC 12345</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-media">
+                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/posts/chirag-wamanacharya-a3ab6b255_health-wellness-goodhealth-activity-7242222974605373442-p55B?utm_source=share&utm_medium=member_android" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Privacy Policy | Terms of Service | Disclaimer</p>
+    </div>
+</footer>
+{% endblock 'footer' %}
+
+{% block 'script' %}
+<script src="{% static 'scripts/bookings.js' %}"></script>
+
+{% endblock 'script' %}
+
