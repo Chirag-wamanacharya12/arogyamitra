@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'extra_head' %}
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}">
+{% endblock 'extra_head' %}
+
+{% block 'title' %}
+    <title>Arogya Mitra | Register</title>
+{% endblock 'title' %}
+
+{% block 'main' %}
+<div class="body">
+    <div class="left-section">
+        <img src="{% static 'images/illustration.jpg' %}" alt="Illustration">
+    </div>
+
+    <div class="right-section">
+        <div class="container">
+            <h2>Register</h2>
+            
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa fa-id-badge"></i>
+                    <select name="user_type" id="user_type" required>
+                        <option value="guest">Guest</option>
+                        <option value="patient">Patient</option>
+                        <option value="physician">Physician</option>
+                        <option value="practitioner">Practitioner</option>
+                        <option value="researcher">Researcher</option>
+                        <option value="service_provider">Service Provider</option>
+                        <option value="health_creator">Health Content Creator</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa fa-user-circle"></i>
+                    <input type="text" id="first_name" name="first_name" placeholder="First Name">
+                </div>
+
+                <div class="input-group">
+                    <i class="fa fa-user-circle"></i>
+                    <input type="text" id="last_name" name="last_name" placeholder="Last Name">
+                </div>
+
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password_confirm" name="password_confirm" placeholder="Confirm Password" required>
+                </div>
+
+                <div class="password-strength">
+                    Password Strength: <span style="color: orange;">Weak</span>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="create-account">Create Account</button>
+                    <button type="button" class="sign-in">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock 'main' %}

@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#FF5733">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block 'extra_head' %}
+
+    {% endblock 'extra_head' %}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    {% block 'title' %}
+
+    {% endblock 'title' %}
+    <style>
+    :root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease-in-out;
+        }
+
+    </style>
+        
+</head>
+<body data-theme="light">
+        {% block 'navbar' %}
+
+        {% endblock 'navbar' %}
+        {% block 'main' %}
+        
+        {% endblock 'main' %}
+        {% block 'footer' %}
+
+        {% endblock 'footer' %}
+
+        {% block 'script' %}
+
+        {% endblock 'script' %}
+
+</body>
+</html>

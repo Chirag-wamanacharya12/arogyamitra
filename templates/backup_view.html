@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Backup Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .table-container {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .table-data {
+            display: none;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        function toggleTable(tableId) {
+            var dataDiv = document.getElementById("data-" + tableId);
+            if (dataDiv.style.display === "none") {
+                fetch(`/backup/get-table-data/?table=` + tableId)
+                    .then(response => response.text())
+                    .then(data => {
+                        dataDiv.innerHTML = data;
+                        dataDiv.style.display = "block";
+                    });
+            } else {
+                dataDiv.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Database Backup Viewer</h2>
+
+    {% for table in tables %}
+        <div class="table-container" onclick="toggleTable('{{ table }}')">
+            <strong>{{ table }}</strong>
+        </div>
+        <div id="data-{{ table }}" class="table-data"></div>
+    {% endfor %}
+
+</body>
+</html>
