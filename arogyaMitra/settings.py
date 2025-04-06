@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = 'django-insecure-2z3*c^%d_5c)^!$g=xkf6#7iv*7#79e=8n-34r(*i%^qu5n9y='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 # settings.py
 AUTH_USER_MODEL = 'user.CustomUser'
@@ -97,7 +97,7 @@ SOCIALACCOUNT_PROVIDER = {
     'google':{
         'APP':{
             'client_id':'915604357265-kug7jvak3d9fkske1bei2dfo1ugpp464.apps.googleusercontent.com',
-
+            'secret':'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',
             'key':''
         },
         'SCOPE': [
