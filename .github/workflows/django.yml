@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.14]
+        python-version: [python-3.14.0-alpha.6-darwin-arm64-freethreaded.tar.gz]
 
     steps:
     - uses: actions/checkout@v4
