@@ -17,20 +17,24 @@
     </a>
     <div class="nav-box">
         <a href="{% url 'store' %}" class="nav-item">store</a>
-        <a href="" class="nav-item">reports</a>
+        <a href="{% url 'reports' %}" class="nav-item">reports</a>
         <a href="{% url 'bookings' %}" class="nav-item">bookings</a>
         <a href="" class="nav-item selected" >contact-us</a>
     </div>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.profile_image %}
     <div class="nav-box">
-        <a href="{% url 'profile' %}"><img class="profile_pic" src="{% static 'images/profile.jfif' %}"
+        <a href="{% url 'profile' %}"><img class="profile_pic" src="{{ user.profile_image.url }}"
+                alt="profile_pic"></a>
+    </div>
+    {% elif user.is_authenticated %}
+    <div class="nav-box">
+        <a href="{% url 'profile' %}"><img class="profile_pic" src="{{ user.avatar }}"
                 alt="profile_pic"></a>
     </div>
     {% else %}
     <div class="nav-box">
-        <a href="{% url 'login' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
-                alt="profile_pic"></a>
-    </div>
+        <a href="{% url 'login' %}" class="nav-item"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
+            alt="profile_pic"></a>
     {% endif %}
 </nav>
 {% endblock 'navbar' %}
@@ -59,13 +63,6 @@
 
     <form action="{% url 'message' %}"  method="post" class="bg-gray-800 p-6 rounded">
         {% csrf_token %}
-        {% if messages %}
-        <div class="mb-4 p-4 bg-green-600 text-white rounded">
-            {% for message in messages %}
-            <p>{{ message }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
         <div class="mb-4">
             <input class="w-full p-2 bg-gray-700 rounded border border-gray-600 text-white" name="name" id="name" type="text"
                 placeholder="Name" />

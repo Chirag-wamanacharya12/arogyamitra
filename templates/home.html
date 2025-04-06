@@ -26,8 +26,7 @@
     </div>
     {% elif user.is_authenticated %}
     <div class="nav-box">
-        <a href="{% url 'profile' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
-                alt="profile_pic"></a>
+        <a href="{% url 'profile' %}"><img class="profile_pic" src="{{ user.avatar }}" alt="profile_pic"></a>
     </div>
     {% else %}
     <div class="nav-box">
@@ -70,6 +69,7 @@
             <h3 class="text-xl font-semibold mb-2">Quick support</h3>
             <p class="text-gray-600">Instant support to answer your questions and solve issues on the spot.</p>
         </a>
+        {% if user.is_authenticated %}
         <a href="{% url 'profile' %}" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-2xl transition">
             <div class="text-blue-600 mb-4">
                 <i class="fa-solid fa-user text-3xl"></i>
@@ -77,6 +77,15 @@
             <h3 class="text-xl font-semibold mb-2">User profile</h3>
             <p class="text-gray-600">Keep track of everything that matters to your well-being, easily and securely.</p>
         </a>
+        {% else %}
+        <a href="{% url 'profile' %}" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-2xl transition">
+            <div class="text-blue-600 mb-4">
+                <i class="fa-solid fa-user text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">User profile( login first )</h3>
+            <p class="text-gray-600">Keep track of everything that matters to your well-being, easily and securely.</p>
+        </a>
+        {% endif %}
     </section>
 </main>
 <!--------------- appointment booking ------------------->
@@ -123,7 +132,8 @@
 <!--------------- subscription plans ------------------->
 <h3 class="planHead">Choose best plan for You</h3>
 <div class="subscription-plans">
-    <div class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
+    <div
+        class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Free plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">₹. </span>
@@ -134,9 +144,11 @@
             <li class="flex items-center">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Emergency support</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Emergency
+                    support</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -144,7 +156,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">1GB Cloud storage</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">1GB Cloud
+                    storage</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -152,7 +165,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Personal profile</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Personal
+                    profile</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -160,7 +174,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Access to tools</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Access to
+                    tools</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -168,7 +183,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Access to services</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Access to
+                    services</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -176,14 +192,17 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">24×7 phone & email support</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">24×7 phone &
+                    email support</span>
             </li>
         </ul>
-        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Choose
+        <button type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Choose
             plan</button>
     </div>
 
-    <div class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
+    <div
+        class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Basic plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">₹. </span>
@@ -197,7 +216,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Everything in free plan</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Everything in
+                    free plan</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -205,7 +225,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">5GB Cloud storage</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">5GB Cloud
+                    storage</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -213,7 +234,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Pharmacy discount 5%</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Pharmacy
+                    discount 5%</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -221,7 +243,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Health insurance of 10 Lakh</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Health insurance
+                    of 10 Lakh</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -229,7 +252,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Personal health ID</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Personal health
+                    ID</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -237,7 +261,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Medical records span 3 months</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Medical records
+                    span 3 months</span>
             </li>
         </ul>
         <button type="button"
@@ -245,7 +270,8 @@
             plan</button>
     </div>
 
-    <div class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
+    <div
+        class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Premium plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">₹. </span>
@@ -259,7 +285,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Everything in basic plan</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Everything in
+                    basic plan</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -267,7 +294,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">7.5GB Cloud storage</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">7.5GB Cloud
+                    storage</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -275,7 +303,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Pharmacy discount 7%</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Pharmacy
+                    discount 7%</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -283,7 +312,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Discount of 10% on each bill</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Discount of 10%
+                    on each bill</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -291,7 +321,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Medical records span till subscribed</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Medical records
+                    span till subscribed</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -299,7 +330,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Sigle user multiple 3 profile</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Sigle user
+                    multiple 3 profile</span>
             </li>
         </ul>
         <button type="button"
@@ -307,7 +339,8 @@
             plan</button>
     </div>
 
-    <div class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
+    <div
+        class="w-70 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700 shadow-sm hover:shadow-2xl transition">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Exclusive plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">₹. </span>
@@ -321,7 +354,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Everything in premium plan</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Everything in
+                    premium plan</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -338,7 +372,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Pharmacy discount of 15%</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Pharmacy
+                    discount of 15%</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -346,7 +381,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Discount of 25% on each bill</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Discount of 25%
+                    on each bill</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -354,7 +390,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">1 : 1 online consultations</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">1 : 1 online
+                    consultations</span>
             </li>
             <li class="flex">
                 <svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
@@ -362,7 +399,8 @@
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                 </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited profile creation</span>
+                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited
+                    profile creation</span>
             </li>
         </ul>
         <button type="button"
