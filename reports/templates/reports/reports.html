@@ -1,0 +1,165 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block 'extra_head' %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="{% static 'styles/home.css'%}">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;     /* Firefox */
+    }
+</style>
+{% endblock 'extra_head' %}
+{% block 'title' %}
+<title>arogyamitra | store</title>
+{% endblock 'title' %}
+{% block 'navbar' %}
+<nav class="home-nav">
+    <a href="{% url 'home' %}" class="nav-box">
+        <img class="logo" src="{% static 'images/Arogya.jpg' %}" alt="logo">
+    </a>
+    <div class="nav-box">
+        <a href="{% url 'store' %}" class="nav-item">store</a>
+        <a href="{% url 'reports' %}" class="nav-item selected">reports</a>
+        <a href="{% url 'bookings' %}" class="nav-item">bookings</a>
+        <a href="{% url 'contact' %}" class="nav-item">contact-us</a>
+    </div>
+    {% if user.is_authenticated and user.profile_image %}
+    <div class="nav-box">
+        <a href="{% url 'profile' %}"><img class="profile_pic" src="{{ user.profile_image.url }}" alt="profile_pic"></a>
+    </div>
+    {% elif user.is_authenticated %}
+    <div class="nav-box">
+        <a href="{% url 'profile' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
+                alt="profile_pic"></a>
+    </div>
+    {% else %}
+    <div class="nav-box">
+        <a href="{% url 'login' %}"><img class="profile_pic" src="{% static 'images/default_user.png' %}"
+                alt="profile_pic"></a>
+    </div>
+    {% endif %}
+</nav>
+{% endblock 'navbar' %}
+{% block 'main' %}
+<div class="main bg-gray-100 p-20 flex items-center px-4" style="height: 90vh;">
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-lg">
+        <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">📄 Upload a Document</h2>
+
+        {% if error %}
+        <p class="text-red-600 mb-4 text-sm">{{ error }}</p>
+        {% endif %}
+
+        <form action="{% url 'upload_document' %}" method="post" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label for="title" class="block text-gray-700 font-medium">Title</label>
+                <input type="text" id="title" name="title" required
+                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <div>
+                <label for="description" class="block text-gray-700 font-medium">Description</label>
+                <textarea id="description" name="description" rows="4"
+                    class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    placeholder="Optional description..."></textarea>
+            </div>
+
+            <div>
+                <label for="file" class="block text-gray-700 font-medium">Upload File</label>
+                <input type="file" id="file" name="file" required
+                    class="mt-1 w-full file:px-4 file:py-2 file:border file:rounded-lg file:bg-blue-50 file:text-blue-700 file:cursor-pointer">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                Upload Document
+            </button>
+        </form>
+    </div>
+    <section class="max-w-4xl mx-auto mt-10 px-4 overflow-y-scroll scrollbar-hide" style="height: 80vh;">
+        <ul class="space-y-4">
+            {% for report in documents %}
+            <li class="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-semibold text-gray-800">{{ report.title }}</h3>
+                    <p class="text-xs text-gray-600 mt-1">{{ report.description }}</p>
+                </div>
+                <div class="actions flex">
+                    <div class="md:ml-6">
+                        <a href="{{ report.file.url }}" download
+                        class="inline-block flex gap-3 items-center px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition"><i class="fa-solid fa-file-arrow-down"></i>Download</a>
+                    </div>
+                    <div class="md:ml-6">
+                        <a target="_blank" href="{{ report.file.url }}" view
+                        class="inline-block flex gap-3 items-center px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition"><i class="fa-solid fa-expand"></i>View</a>
+                    </div>
+                    <div class="md:ml-6">
+                        <a href="{% url 'delete_document' report.id %}" delete
+                        class="inline-block flex gap-3 items-center px-5 py-2 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 transition"><i class="fa-solid fa-trash"></i>Delete</a>
+                    </div>
+                </div>
+            </li>
+            {% empty %}
+            <li class="text-center text-gray-500">No documents available.</li>
+            {% endfor %}
+        </ul>
+    </section>    
+</div>
+{% endblock 'main' %}
+{% block 'footer' %}
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>We are committed to providing reliable health information and services.</p>
+            <p>&copy; 2024 Health Portal</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a
+                        href="file:///F:/fullstack%20projects/health%20portal/Tools_&_Calculator/BMI_Calculator/BMI_Calc.html">Services</a>
+                </li>
+                <li><a href="#book_Appointment">Appointments</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/store/store-contact-us/contact-us.html">Contact
+                        Us</a></li>
+                <li><a href="file:///F:/fullstack%20projects/health%20portal/FAQ/index.html">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: support@healthportal.com</p>
+            <p>Phone: +1 (234) 567-8901</p>
+            <p>Address: 123 Health St, Wellness City, HC 12345</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-media">
+                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/posts/chirag-wamanacharya-a3ab6b255_health-wellness-goodhealth-activity-7242222974605373442-p55B?utm_source=share&utm_medium=member_android"
+                    aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Privacy Policy | Terms of Service | Disclaimer</p>
+    </div>
+</footer>
+{% endblock 'footer' %}
+{% block 'script' %}
+<script src="{% static 'scripts/cart.js' %}"></script>
+{% endblock 'script' %}
