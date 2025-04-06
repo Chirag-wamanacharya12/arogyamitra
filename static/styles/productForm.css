@@ -1,0 +1,419 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+.storeNav{
+    display: flex;
+    border-bottom: 1px solid rgb(173, 173, 173);
+}
+.location-bar{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding-block: 0;
+    padding-inline: 4vw;
+    border-left: 1px solid rgb(173, 173, 173);
+}
+.location-bar .bar-title{
+    font-size: 1.2em;
+    margin: 0px 0px 6px;
+    font-weight: bold;
+}
+.location-bar .locationBlock{
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+}
+.searchBox{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.searchBox .search-bar{
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    border: 0.5px solid rgb(173, 173, 173);
+    text-decoration: none;
+}
+.searchBox .search-bar svg{
+    height: 20px;
+    width: 20px;
+    margin: 0px 12px;
+}
+.searchBox .search-bar .searchInput input{
+    height: 3vw;
+    width: 37vw;
+    border: none;
+    background-color: #f8f8f8;
+    margin: 0px 12px;
+}
+.account{
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    padding-inline: 2vw;
+}
+.cart{
+    display: flex;
+    align-items: center;
+    padding-inline: 1vw;
+}
+.cart .cartButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7vw;
+    font-size: 1.3em;
+    border-radius: 10px;
+    color: white;
+    background-color:rgb(43, 75, 172);
+}
+.cart .cartButton svg{
+    height: 25px;
+    width: 25px;
+    margin: 0px 6px;
+}
+/* ------------------------------------------------ form -------------------------------------------------------------- */
+
+.productForm{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productInfo{
+    padding: 1vw;
+    border: 1px solid red;
+    width: 50vw;
+    
+}
+.productInfo .input input{
+    padding: 1vw;
+    height: 3vw;
+    border: none;
+    border-radius: 10px;
+    background-color: #e9e9e9;
+}
+.productInfo .input textarea{
+    resize: none;
+}
+.choices{
+    width: 100%;
+
+}
+
+/* choices */
+
+/* From Uiverse.io by mrhyddenn */ 
+.container{
+    width: fit-content;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    background-color:#888;
+}
+.check {
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    margin: auto;
+    width: 25px;
+    height: 25px;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .check:before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(0, 81, 255, 0);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .check svg {
+    position: relative;
+    z-index: 1;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #0756f5;
+    stroke-width: 1.5;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.2s ease;
+  }
+  
+  .check svg path {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+  }
+  
+  .check svg polyline {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 66;
+  }
+  
+  .check:hover:before {
+    opacity: 1;
+  }
+  
+  .check:hover svg {
+    stroke: #4285f4;
+  }
+  
+  #cbx:checked + .check svg {
+    stroke: #012907;
+  }
+  
+  #cbx:checked + .check svg path {
+    stroke-dashoffset: 60;
+    transition: all 0.3s linear;
+  }
+  
+  #cbx:checked + .check svg polyline {
+    stroke-dashoffset: 42;
+    transition: all 0.2s linear;
+    transition-delay: 0.15s;
+  }
+  
+
+  
+
+/* ------- */
+
+.upload-container {
+    position: sticky;
+    top: 0;
+    max-height: 40vw;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid red;
+}
+  
+  
+
+
+
+/* Basic styling for the form container */
+.input {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for select dropdowns */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover effect for select dropdowns */
+select:hover {
+    border-color: #007bff;
+}
+
+/* Focus effect for select dropdowns */
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style for category and subcategory select */
+#category, #sub_category {
+    margin-top: 10px;
+}
+
+.upload-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.main-preview {
+    width: 100% ;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.add-image {
+    border: 2px dashed #bbb;
+    font-size: 24px;
+    font-weight: bold;
+    color: #888;
+}
+
+.add-image span {
+    display: block;
+}
+
+
+
+/* ------------------------------------------------ Footer -------------------------------------------------------------- */
+
+
+/* Footer Styling */
+.footer {
+    background-color: #007bff;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: whitesmoke;
+    text-align: left;
+}
+
+.footer-container {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 200px; /* Flex-grow, flex-shrink, and flex-basis */
+    margin: 10px;
+    color: whitesmoke;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section p,
+.footer-section ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul {
+    list-style-type: none;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+    color: #f0f0f0; /* Light hover effect */
+}
+
+/* Social Media Styling */
+.social-media {
+    display: flex;
+    gap: 10px;
+}
+
+.social-media a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2rem; /* Consistent size across browsers */
+}
+
+.social-media a:hover {
+    color: #f0f0f0;
+}
+
+/* Footer Bottom Styling */
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: whitesmoke;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        flex: 1 1 100%; /* Ensures full width on smaller screens */
+        margin: 10px 0;
+    }
+
+    .footer-bottom {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 15px; /* Adjust padding for smaller screens */
+    }
+
+    .footer-section h3 {
+        font-size: 1.1rem; /* Slightly smaller headings */
+    }
+
+    .social-media {
+        gap: 8px;
+    }
+}

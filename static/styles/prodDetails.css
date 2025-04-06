@@ -1,0 +1,447 @@
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: beige;
+    font-family: 'Lato', sans-serif;
+}
+
+.detailsContainer{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    background-color: #fff;
+    padding: 2vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #9b9b9b;
+}
+
+
+
+.detailsContainer .infoContainer{
+    width: 40%;
+    height: 100%;
+    padding: 15px;
+}
+
+.detailsContainer .infoContainer .productTitle{
+    margin-bottom: 1vw;
+    color: #333;
+    font-family: 'Lato', sans-serif;
+}
+.detailsContainer .infoContainer .brand{
+    margin-bottom: 1vw;
+    padding-bottom: 1vw;
+    color: #333;
+    border-bottom: 1px solid #9b9b9b;
+}
+
+.detailsContainer .productSummery{
+    position: sticky;
+    top: 0;
+    width: 20%;
+    margin-inline: 1vw;
+    height: fit-content;
+    border: 1px solid #9b9b9b;
+    padding: 1vw;
+    border-radius: 10px;
+}
+
+.detailsContainer .productSummery .price{
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    vertical-align: top;
+    gap: 3px;
+    padding-top: 5px;
+}
+
+.detailsContainer .productSummery .price p{
+    margin: 0;
+    align-self: flex-start;  /* Aligns all children to the same level */
+    line-height: 1;
+}
+
+.detailsContainer .productSummery .price p:nth-child(1){
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.detailsContainer .productSummery .price p:nth-child(2){
+    font-size: 2rem;
+    color: #333;
+    position: relative;
+    top: -4px;
+    margin: 0;
+}
+
+.detailsContainer .productSummery .price p:nth-child(3){
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.detailsContainer .productSummery .price p:nth-child(4){
+    font-size: 1rem;
+    align-self: center;
+    color: #333;
+}
+
+.detailsContainer .productSummery .rating{
+    padding: 0;
+    padding-bottom: 0.5vw;
+    display: flex;
+    align-items: flex-start;
+    gap: 3px;
+    padding-top: 3px;
+}
+
+.delivery{
+    margin-top: 1vw;
+}
+
+.detailsContainer .productSummery .location{
+    padding-block: 1vw;
+    display: flex;
+    align-items: center;
+}
+
+.detailsContainer .productSummery .stock{
+    display: flex;
+    gap: 0.5vw;
+    flex-direction: column;
+    margin-top: 1vw;
+}
+
+.detailsContainer .productSummery .stock .securePay{
+    display: flex;
+    align-items: center;
+}
+
+.callToActionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 2vw;
+}
+
+.callToActionButtons form{
+    width: 100%;
+    border: none;
+}
+
+.callToActionButtons form .buyNowButton{
+    width: 100%;
+    border: none;
+}
+
+.payment{
+    flex: 1;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.addToCartButton,
+.buyNowButton {
+    flex: 1;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.addToCartButton {
+    background-color: #003366; /* Dark Navy Blue */
+    color: #ffffff;
+}
+
+.addToCartButton:hover {
+    background-color: #002244; /* Slightly Darker Shade */
+    transform: scale(1.05);
+}
+
+.buyNowButton {
+    background-color: #004080; /* Deep Blue */
+    color: #ffffff;
+}
+
+.buyNowButton:hover {
+    background-color: #003366; /* Slightly Darker Blue */
+    transform: scale(1.05);
+}
+
+/* ----------------- quantity ------------------- */
+
+.quantity {
+    margin-top: 2vw;
+    font-size: 16px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 5px;
+    width: 5vw;
+    font-size: 16px;
+}
+
+/*  ---------------- Tool Tip ------------------- */
+
+.securePay {
+    position: relative;
+    display: inline-block;
+}
+
+#secureTransaction {
+    color: #5a2ea6; /* Matching the link color */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    top: 3vh;
+    left: -15vw;
+    width: 30vw;
+
+    background: white;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    padding: 1vw;
+    font-size: 14px;
+    display: none;
+    z-index: 1000;
+}
+
+.tooltip strong {
+    font-size: 16px;
+    color: black;
+}
+
+.tooltip a {
+    color: #007185;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.tooltip a:hover {
+    text-decoration: underline;
+}
+
+.close-btn {
+    padding-inline: 5px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.close-btn:hover{
+    border: 1px solid #003366;
+}
+
+/* -------------------------------- Pricing and Offer -------------------------------------------- */
+
+.detailsContainer .infoContainer .pricingOffer{
+    display: flex;
+    gap: 0.5vw;
+}
+.detailsContainer .infoContainer .pricingOffer .price{
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    vertical-align: top;
+    gap: 3px;
+    padding-top: 5px;
+}
+
+.detailsContainer .infoContainer .pricingOffer .price p{
+    margin: 0;
+    align-self: flex-start;  /* Aligns all children to the same level */
+    line-height: 1;
+}
+
+.detailsContainer .infoContainer .pricingOffer .price p:nth-child(1){
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.detailsContainer .infoContainer .pricingOffer .price p:nth-child(2){
+    font-size: 2rem;
+    color: #333;
+    position: relative;
+    top: -4px;
+    margin: 0;
+}
+
+.detailsContainer .infoContainer .pricingOffer .price p:nth-child(3){
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.detailsContainer .infoContainer .pricingOffer .price p:nth-child(4){
+    font-size: 1.1rem;
+    align-self: center;
+    color: #333;
+}
+
+.detailsContainer .infoContainer .pricingOffer .offer{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    color: aliceblue;
+    background-color: #003366;
+    padding: 0.5vw;
+    border-radius: 15px;
+}
+
+.detailsContainer .infoContainer .orgPriceContainer{
+    margin-top: 1vh;
+    display: flex;
+    font-size: 0.9em;
+    color: #929292;
+}
+
+.detailsContainer .infoContainer .orgPriceContainer p{
+    text-decoration: line-through;
+
+}
+
+.detailsContainer .infoContainer .taxInfo{
+    margin-top: 1vh;
+    padding-bottom: 1vw;
+    border-bottom:1px solid  #929292;
+}
+
+.guides{
+    height: 23vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.guides::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+}
+
+.guides .guideDataList{
+    list-style-type: none;
+
+}
+
+.guides .guideDataList .guideDataTitle{
+    margin-top: 2vh;
+}
+
+.guides .guideDataSubList{
+    list-style-type:disc;
+}
+
+.guides .guideDataSubList .guideData{
+    margin-left: 1.5vw;
+    margin-block: 0.5vw;
+}
+
+.policies{
+    display: flex;
+    padding-block: 1vh;
+    margin-bottom: 1vw;
+    border-bottom: 1px solid #929292;
+}
+.policies .refund{
+    height: inherit;
+    aspect-ratio: 1/1;
+
+}
+.policies .refund .refundIcon{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.policies .refund .refundIcon .icon{
+    margin-left: 1px;
+}
+.policies .refund .refundIcon .icon img{
+    height: 8vh;
+    margin-left: 10px;
+}
+
+.policies .refund .refundIcon .msg{
+    display: flex;
+    gap: 5px;
+}
+
+.policies .payOnDelivery{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.policies .payOnDelivery .icon img{
+    height: 8vh;
+    margin-left: 10px;
+}
+
+.policies .payOnDelivery .msg{
+    font-size: 0.9rem;
+}
+
+
+
+.detailsContainer .imageContainer{
+    width: 40%;
+    height: 100%;
+}
+.imageContainer .container {
+    height: 100%;
+    width: 100%;
+}
+
+.container .thumbnail-container{
+    display: flex;
+    gap: 10px;
+    margin: 1vw;
+}
+.container .thumbnail-container .thumbnail{
+    height: 10vh;
+    border-radius: 15px;
+    border: 1px solid rgb(83, 83, 83);
+}
+
+.container .thumbnail-container .thumbnail:hover{
+    cursor: pointer;
+}
+
+.container .thumbnail-container .thumbnail img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+.main-image{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

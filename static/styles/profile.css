@@ -1,0 +1,758 @@
+/* Reset styles for consistency */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input{
+    padding-left: 1vw;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; /* Improve font rendering */
+    -moz-osx-font-smoothing: grayscale; /* Improve font rendering on Firefox */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+.profileContainer{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+.home-nav {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    flex-wrap: wrap;
+}
+
+.home-nav .nav-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-nav .nav-box .logo {
+    margin: 0;
+}
+
+.home-nav .nav-box .profile_pic {
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures image fits correctly inside the circle */
+}
+
+.home-nav .nav-box:nth-child(2) {
+    gap: 15px;
+}
+
+.home-nav .nav-box .nav-item {
+    padding: 8px 20px;
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.home-nav .nav-box .nav-item.selected {
+    background-color: #f0f0f0;
+    border-color: black;
+}
+
+.home-nav .nav-box .nav-item:hover {
+    background-color: #f0f0f0;
+    border-color: black;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .home-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 40px;
+        width: 40px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 15px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-nav {
+        padding: 5px 10px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 35px;
+        width: 35px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 12px;
+        font-size: 1.4rem;
+    }
+}
+
+.profile {
+    height: 60vw;
+    border-block: 1px solid black;
+}
+
+/* Modified Section Styling */
+body {
+    min-height: 100vh;
+}
+
+.familyDoctor {
+    height: 26vh;
+    margin: 1.5vw;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgb(255, 255, 255), rgb(236, 236, 236)); /* Gradient */
+    padding: 1vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.familyDoctor .header{
+    height: 6vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.familyDoctor .header .edit{
+    height: 24px;
+    aspect-ratio: 1/1;
+}
+
+.familyDoctor .header .edit img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.familyDoctor .profileImage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6vw;
+    aspect-ratio: 1/1;
+    border: 2px dashed #3a3a3a;
+    border-radius: 50%;
+}
+.familyDoctor .profileImage img{
+    height: 90%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.familyDoctor .name{
+    display: flex;
+    margin-block: 8px;
+}
+.familyDoctor .name p{
+    color: rgb(32, 32, 32);
+    font-size: 1.5rem;
+}
+.familyDoctor .about{
+    display: flex; 
+    align-items: baseline;
+    color: rgb(32, 32, 32);
+    margin-block: 8px;
+}
+.familyDoctor .about .specialization{
+    font-size: 1.2rem;
+}
+.familyDoctor .about .city{
+    font-size: 0.8rem;
+}
+.familyDoctor .title .titleItem{
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: rgb(153, 153, 108);
+}
+
+/* ----------------------------------------------- skeleton ------------------------------------------------------------- */
+
+.skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: rgba(240, 240, 240, 0.6);
+    border: 2px dashed #3a3a3a;
+    border-radius: 10px;
+}
+
+.skeleton-box {
+    margin-inline: 0.5vw;
+    background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.no-doctor-text {
+    font-size: 1.3vw;
+    font-weight: bold;
+    color: #3a3a3a;
+    margin-top: 10px;
+}
+
+.connect-doctor-btn {
+    background-color: #007bff;
+    color: white;
+    font-size:  1.2vw;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.connect-doctor-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* ----------------------------------------------- skeleton ends ------------------------------------------------------------- */
+
+/* ----------------------------------------------- membership starts ------------------------------------------------------------- */
+
+.membership{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: black;
+    height: 15vh;
+    margin: 1.5vw;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgb(94, 88, 88), rgb(14, 11, 11)); /* Gradient */
+    padding: 1vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.membership p{
+    margin: auto;
+    font-size: 0.9rem;
+}
+
+.membership .check{
+    width: fit-content;
+    align-self: flex-end;
+    text-decoration: none;
+    color: black;
+    background-color: bisque;
+    padding-inline: 1vw;
+    padding-block: 1vh;
+    border-radius: 15px;
+    margin-top: auto;
+}
+
+/* ----------------------------------------------- membership ends ------------------------------------------------------------- */
+/* ----------------------------------------------- sidenav starts ------------------------------------------------------------- */
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1.5vw;
+    padding: 1vw;
+    
+    /* Glassmorphism Effect */
+    background: rgba(0, 0, 0, 0.39); /* Dimgray with transparency */
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(5px) saturate(180%);
+    border: 1px solid rgba(49, 49, 49, 0.144);
+    
+    /* Shadow */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+.sidenav a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-block: 0.3vw;
+    padding-block: 1vh;
+}
+
+.sidenav a:hover{
+    border-left: 4px solid rgb(248, 252, 236);
+    background-color: rgba(248, 252, 236, 0.123);
+}
+.sidenav a:hover img{
+    filter: invert(90%) sepia(10%) saturate(300%) hue-rotate(10deg);
+}
+.sidenav a:hover p{
+    color: rgb(248, 252, 236);
+}
+
+
+.sidenav a img{
+    height: 2vw;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin-inline: 0.4vw;
+}
+
+.sidenav a p{
+    color: black;
+    text-decoration: none;
+    font-size: 1.3rem;
+    margin-inline: 0.4vw;
+}
+
+.sidenav a.active {
+    border-left: 4px solid rgb(248, 252, 236);
+    background-color: rgba(248, 252, 236, 0.123);
+}
+
+.sidenav a.active img {
+    filter: invert(90%) sepia(10%) saturate(300%) hue-rotate(10deg);
+}
+
+.sidenav a.active p {
+    color: rgb(248, 252, 236);
+}
+
+/* ----------------------------------------------- sidenav ends ------------------------------------------------------------- */
+
+.sidebar {
+    width: 20%;
+    height: calc(100vh - 90px); /* Full height since navbar is removed */
+    overflow-y: hidden; /* Enable vertical scrolling */
+}
+
+.main {
+    width:calc(100% - 15%);
+    height: calc(100vh - (90px + 1vw)); /* Full height */
+    overflow-y: auto; /* Disable scrolling */
+    padding: 1vw;
+    scroll-padding-top: 20px;
+    scroll-behavior: smooth;
+}
+
+.main section{
+    height: 100%;
+    width: 100%;
+    padding: 1vw;
+    border-radius: 25px;
+    background-color: rgb(233, 227, 218);
+    margin-block: 1vw;
+    display: flex;
+    justify-content: center;
+}
+
+.generalInfo{
+    width: 100%;
+    height: 40vh;
+    background-color: whitesmoke;
+    border-radius:15px;
+    padding: 1vw;
+    display: flex;
+}
+
+.profileInfo{
+    display: flex;
+}
+
+.profileInfo .divider{
+    height: 100%;
+    width: 2px;
+    margin-inline: 1vw;
+    background-color: rgb(255, 117, 66);
+}
+
+.profileInfo .info{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.profileInfo .userName{
+    display: flex;
+    gap: 0.5vw;
+    font-size: 1.5rem;
+}
+
+.profileInfo .userEmail{
+    font-size: 1.2rem;
+}
+
+.profileInfo .editProfile{
+    text-decoration: none;
+    width: fit-content;
+    color: rgb(255, 117, 66);
+    border: 1px solid rgb(255, 117, 66);
+    padding-inline: 1vw;
+    padding-block: 0.7vw;
+    border-radius: 15px;
+
+} 
+
+.profileImg {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profileImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.uploadIcon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.uploadIcon img {
+    width: 20px;
+    height: 20px;
+}
+
+.generalInfo .profileInfo .userInfo{
+    height: 100%;
+    width: 50vw;
+}
+
+.userInfo .privateInfo{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 1vh;
+}
+.userInfo .privateInfo div{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% / 3);
+    padding: 1vw;
+    font-size: 1rem;
+    gap: 1vh;
+    color: #8f8e8e;
+}
+.userInfo .privateInfo div p{
+    font-size: 1.3rem;
+    color: #3a3a3a;
+}
+.userInfo .privateInfo div:hover{
+    background-color: rgba(255, 99, 71, 0.116);
+    border-left: 5px solid rgb(253, 78, 47);
+}
+.userInfo .publicInfo div:hover{
+    background-color: rgba(255, 99, 71, 0.116);
+    border-left: 5px solid rgb(253, 78, 47);
+}
+.userInfo .publicInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-block: 1vw;
+}
+.userInfo .publicInfo div{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% / 3);
+    padding: 1vw;
+    font-size: 1rem;
+    color: #8f8e8e
+}
+.userInfo .publicInfo div p{
+    width: fit-content;
+    display: flex;
+    font-size: 1.15rem;
+    color: #3a3a3a;
+}
+
+/* ---------------------------- addFamilyDoctor starts ---------------------- */
+
+.addFamilyDoctor{
+    height: 100%;
+    width: 100%;
+    padding: 1vw;
+    border-radius: 25px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Form Styling */
+form {
+    height: 100%;
+    width: 100%;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Container - Two Sections Side by Side */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Each Section */
+.form-section {
+    width: 48%;
+}
+
+/* Input Fields */
+label {
+    display: block;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input, select {
+    width: 100%;
+    height: 3vw;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea{
+    width: 100%;
+    height: 5vw;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* ---------------------------- Family Section starts ---------------------- */
+
+section .table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1vw;
+    background-color: white;
+    border-radius: 15px;
+}
+.table .table-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    border-bottom: 1px solid #3a3a3a;
+}
+.table .table-header .table-header-item{
+    width: calc(100% / 5);
+    padding: 1vw;
+
+}
+
+.table .table-body .table-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+.table .table-body .table-row{
+    border-bottom: 1px solid #3a3a3a;
+    background-color: #f5f5f5;
+    padding-block: 1vw;
+}
+.table .table-body .table-row .table-data{
+    width: calc(100% / 5);
+    text-align: left;
+    padding-left: 1vw;
+
+}
+
+.table .table-body .table-row .table-data .addmember{
+    position: relative;
+    left: 55vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    padding-block: 1vh;
+    border-radius: 15px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ---------------------------- Medication table starts ---------------------- */
+
+table {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    margin-top: 20px; 
+    border-radius: 15px;
+    overflow-y: auto;
+}
+table thead, table tbody{
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd; 
+    border-radius: 15px;
+
+}
+thead th{
+    padding: 10px;
+    padding-block: 1vw;
+    background-color: #f2f2f2; 
+}
+thead th:first-child{
+    border-top-left-radius: 15px;
+}
+thead th:last-child{
+    border-top-right-radius: 15px;
+}
+tbody tr:nth-child(even) {
+    background-color: #66a2fc3b; 
+}
+
+tbody tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+tbody tr td{
+    margin: 0;
+    padding: -15px;
+    height: fit-content;
+}
+tbody tr:last-child td:first-child{
+    border-bottom-left-radius: 15px;
+}
+tbody tr:last-child td:last-child{
+    border-bottom-right-radius: 15px;
+}
+tbody tr:hover {
+    background-color: #e0e0e0;  
+}
+
+/* -------------------------------------------------------------------------- */
+/* ---------------------------- myorders table starts ---------------------- */
+.myorders{
+    height: 100%;
+    width: 100%;
+    padding: 1vw;
+    background: #f4f4f4;
+    border-radius: 15px;
+}
+
+.listHead, .listBody{
+    display: flex;
+    flex-direction: row;
+}
+
+.listHead .listHeadItem{
+    padding-inline: 1vw;
+    padding: 1vw;
+    font-size: 1.2rem;
+    color: #3a3a3a;
+    font-weight: bold;
+}
+
+.listBody .listHeadItem{
+    padding-inline: 1vw;
+    padding: 1vw;
+    font-size: 1.2rem;
+    color: #3a3a3a;
+    font-weight: bold;
+}
+
+.listBody .listHeadItem:nth-child(1),.listHead .listHeadItem:nth-child(1){
+    width: 10%;
+    padding-inline: 2vw;
+    border-bottom: 1px solid #3a3a3a;
+}
+.listBody .listHeadItem:nth-child(2),.listHead .listHeadItem:nth-child(2){
+    width: 30%;
+    border-bottom: 1px solid #3a3a3a;
+}
+.listBody .listHeadItem:nth-child(3),.listHead .listHeadItem:nth-child(3){
+    width: 25%;
+    border-bottom: 1px solid #3a3a3a;
+}
+.listBody .listHeadItem:nth-child(4),.listHead .listHeadItem:nth-child(4){
+    width: 10%;
+    padding-inline: 2vw;
+    border-bottom: 1px solid #3a3a3a;
+}
+.listBody .listHeadItem:nth-child(5),.listHead .listHeadItem:nth-child(5){
+    width: 15%;
+    padding-inline: 2vw;
+    border-bottom: 1px solid #3a3a3a;
+}
+.listBody .listHeadItem:nth-child(6),.listHead .listHeadItem:nth-child(6){
+    width: 10%;
+    padding-inline: 2vw;
+    border-bottom: 1px solid #3a3a3a;
+}

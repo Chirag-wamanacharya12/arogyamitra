@@ -1,0 +1,318 @@
+/* Reset styles for consistency */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+p{
+    color: white;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; /* Improve font rendering */
+    -moz-osx-font-smoothing: grayscale; /* Improve font rendering on Firefox */
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.home-nav {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    flex-wrap: wrap;
+}
+
+.home-nav .nav-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-nav .nav-box .logo {
+    margin: 0;
+}
+
+.home-nav .nav-box .profile_pic {
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures image fits correctly inside the circle */
+}
+
+.home-nav .nav-box:nth-child(2) {
+    gap: 15px;
+}
+
+.home-nav .nav-box .nav-item {
+    padding: 8px 20px;
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.home-nav .nav-box .nav-item.selected {
+    background-color: #f0f0f0;
+    border-color: black;
+}
+
+.home-nav .nav-box .nav-item:hover {
+    background-color: #f0f0f0;
+    border-color: black;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .home-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 40px;
+        width: 40px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 15px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-nav {
+        padding: 5px 10px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 35px;
+        width: 35px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 12px;
+        font-size: 1.4rem;
+    }
+}
+/* ------------------------------------------------ Contact -------------------------------------------------------------- */
+.contactContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width: 45%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+}
+.content h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: dimgray;
+}
+.btn {
+    display: inline-block;
+    background: #007acc;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.btn:hover {
+    background: #005f99;
+}
+/* ------------------------------------------- subscription plans ------------------------------------------------------- */
+.planHead{
+    text-align: center;
+    font-size: 2rem;
+    color: #003366;
+    margin-top: 1vw;
+}
+.subscription-plans {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    padding-inline: 4vw;
+}
+
+.plan-card {
+    background-color: #f0f4ff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 22%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.plan-card h3 {
+    color: #003366;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.plan-card p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.plan-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.plan-card ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.plan-card button {
+    background-color: #0044cc;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.plan-card button:hover {
+    background-color: #003399;
+}
+
+.plan-card:hover {
+    transform: scale(1.05);
+}
+
+/* ------------------------------------------------ Footer -------------------------------------------------------------- */
+
+
+/* Footer Styling */
+.footer {
+    background-color: #007bff;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: whitesmoke;
+    text-align: left;
+}
+
+.footer-container {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 200px; /* Flex-grow, flex-shrink, and flex-basis */
+    margin: 10px;
+    color: whitesmoke;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section p,
+.footer-section ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul {
+    list-style-type: none;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+    color: #f0f0f0; /* Light hover effect */
+}
+
+/* Social Media Styling */
+.social-media {
+    display: flex;
+    gap: 10px;
+}
+
+.social-media a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2rem; /* Consistent size across browsers */
+}
+
+.social-media a:hover {
+    color: #f0f0f0;
+}
+
+/* Footer Bottom Styling */
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: whitesmoke;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        flex: 1 1 100%; /* Ensures full width on smaller screens */
+        margin: 10px 0;
+    }
+
+    .footer-bottom {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 15px; /* Adjust padding for smaller screens */
+    }
+
+    .footer-section h3 {
+        font-size: 1.1rem; /* Slightly smaller headings */
+    }
+
+    .social-media {
+        gap: 8px;
+    }
+}

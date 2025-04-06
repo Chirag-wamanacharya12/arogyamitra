@@ -1,0 +1,228 @@
+/* Reset styles for consistency */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; /* Improve font rendering */
+    -moz-osx-font-smoothing: grayscale; /* Improve font rendering on Firefox */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+.profileContainer{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+.home-nav {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    flex-wrap: wrap;
+}
+
+.home-nav .nav-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-nav .nav-box .logo {
+    margin: 0;
+}
+
+.home-nav .nav-box .profile_pic {
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures image fits correctly inside the circle */
+}
+
+.home-nav .nav-box:nth-child(2) {
+    gap: 15px;
+}
+
+.home-nav .nav-box .nav-item {
+    padding: 8px 20px;
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.home-nav .nav-box .nav-item.selected {
+    background-color: #f0f0f0;
+    border-color: black;
+}
+
+.home-nav .nav-box .nav-item:hover {
+    background-color: #f0f0f0;
+    border-color: black;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .home-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 40px;
+        width: 40px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 15px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-nav {
+        padding: 5px 10px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 35px;
+        width: 35px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 12px;
+        font-size: 1.4rem;
+    }
+}
+
+.profile {
+    height: 60vw;
+    border-block: 1px solid black;
+}
+
+/* ----------------------------------------------- Edit Form ------------------------------------------------------------- */
+
+/* Main Container */
+.container {
+    width: 80%;
+    background: white;
+    padding: 25px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 30px auto;
+}
+
+/* Header */
+h2 {
+    text-align: center;
+    color: #003366;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Section Box */
+.section {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #e6f0ff;
+    border-left: 5px solid #d63b3b;
+    border-right: 5px solid #d63b3b;
+}
+
+/* Section Titles */
+h3 {
+    color: #d63b3b;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+/* Inputs and Select */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease-in-out;
+}
+
+input:focus, select:focus {
+    border-color: #004080;
+    outline: none;
+}
+
+/* Submit Button */
+button {
+    background: #d63b3b;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+button:hover {
+    background: #b32d2d;
+    transform: scale(1.03);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    input, select, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+.profile-image-section {
+    margin-bottom: 20px;
+}
+
+.current-profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px 0;
+    display: block;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */

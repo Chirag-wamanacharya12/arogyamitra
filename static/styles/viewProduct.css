@@ -1,0 +1,387 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+html{
+    scroll-behavior: smooth;
+}
+.storeNav{
+    display: flex;
+    border-bottom: 1px solid rgb(173, 173, 173);
+}
+
+.location-bar{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding-block: 0;
+    padding-inline: 4vw;
+    border-left: 1px solid rgb(173, 173, 173);
+}
+.location-bar .bar-title{
+    font-size: 1.2em;
+    margin: 0px 0px 6px;
+    font-weight: bold;
+}
+.location-bar .locationBlock{
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+}
+.searchBox{
+    display: flex;
+    align-items: center;
+}
+.searchBox .search-bar{
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    border: 0.5px solid rgb(173, 173, 173);
+}
+.searchBox .search-bar svg{
+    height: 20px;
+    width: 20px;
+    margin: 0px 12px;
+}
+.searchBox .search-bar .searchInput input{
+    height: 3vw;
+    width: 37vw;
+    border: none;
+    background-color: #f8f8f8;
+    margin: 0px 12px;
+}
+.account{
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    font-size: 1.3em;
+    padding-inline: 1.6vw;
+}
+.cart{
+    position: relative;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding-inline: 1vw;
+   justify-self: flex-end;
+}
+.cart .cartButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7vw;
+    font-size: 1em;
+    border-radius: 10px;
+    color: white;
+    background-color:rgb(43, 75, 172);
+}
+.cart .cartButton svg{
+    height: 20px;
+    width: 20px;
+    margin: 0px 6px;
+}
+/* ----------------------------------------------- subCategory ------------------------------------------------------------ */
+
+.subCategoryWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.subCategory {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    scrollbar-width: none; /* Hide scrollbar */
+    flex: 1; /* Take full width */
+    min-width: 0;
+}
+
+.subCategory::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Webkit browsers */
+}
+
+.subCategoryItem {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    text-decoration: none;
+    color: #1565c0;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    white-space: nowrap;
+}
+
+.subCategoryItem:hover {
+    background-color: #64b5f6;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.scrollButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(21, 101, 192, 0.5); /* 90% transparent */
+    color: rgb(255, 255, 255); /* Slightly transparent white text */
+    border: none;
+    font-size: 25px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+    z-index: 10; /* Ensures buttons stay above the list */
+}
+
+.scrollButton.left {
+    left: 10px;
+}
+
+.scrollButton.right {
+    right: 10px;
+}
+
+.scrollButton:hover {
+    background-color: rgba(47, 157, 247, 0.76); /* Slightly darker blue on hover */
+    color: #ffffff;
+}
+
+
+/* ------------------------------------------------ products -------------------------------------------------------------- */
+a{
+    text-decoration: none;
+    color: black;
+}
+.prodlist{
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-block: 2vw;
+}
+.product-card{
+    width: 14vw;
+    padding-inline: 1vw;
+    border-radius: 10px;
+    margin: auto;
+    border: 0.5px solid rgb(173, 173, 173);
+    text-decoration: none;
+}
+
+.product-card .flag{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f8f8f8;
+    width: 3vw;
+    height: 4vw;
+    clip-path: polygon(100% 0, 100% 65%, 50% 100%, 0 65%, 0 0);
+    background-color: rgb(0, 83, 131);
+}
+.product-card .productImage{
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+    background-color: darkgray;
+}
+.product-card .productImage img{
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+.product-card .deliveryTime{
+    padding-block: 0.5vw;
+}
+.product-card .deliveryTime .timeBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 0.5vw;
+    background-color: rgb(157, 216, 250);
+}
+.product-card .description {
+    max-height: 2vw;
+    width: 13vw;
+    margin-block: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.product-card .quantity{
+    margin-block: 5px;
+}
+.product-card .card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1vw;
+}
+.product-card .card-footer .button{
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding-inline: 1.8vw;
+    padding-block: 0.7vw;
+    color: rgb(1, 52, 82);
+    border: 2px solid rgb(9, 96, 146);
+}
+.product-card .card-footer .button:hover{
+    background-color: rgb(77, 186, 250);;
+    color: rgb(2, 36, 56);
+    font-weight: bold;
+    border: 2px solid rgb(2, 36, 56);
+}
+
+.product-card .PriceValue{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.product-card .PriceValue .discountedPriceValue{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: rgb(2, 36, 56);
+}
+.product-card .PriceValue .originalPriceValue{
+    font-size: 0.8em;
+    color: rgb(173, 173, 173);
+    text-decoration: line-through;
+}
+
+/* ------------------------------------------------ Footer -------------------------------------------------------------- */
+
+
+/* Footer Styling */
+.footer {
+    background-color: #007bff;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: whitesmoke;
+    text-align: left;
+}
+
+.footer-container {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 200px; /* Flex-grow, flex-shrink, and flex-basis */
+    margin: 10px;
+    color: whitesmoke;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section p,
+.footer-section ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul {
+    list-style-type: none;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+    color: #f0f0f0; /* Light hover effect */
+}
+
+/* Social Media Styling */
+.social-media {
+    display: flex;
+    gap: 10px;
+}
+
+.social-media a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2rem; /* Consistent size across browsers */
+}
+
+.social-media a:hover {
+    color: #f0f0f0;
+}
+
+/* Footer Bottom Styling */
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: whitesmoke;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        flex: 1 1 100%; /* Ensures full width on smaller screens */
+        margin: 10px 0;
+    }
+
+    .footer-bottom {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 15px; /* Adjust padding for smaller screens */
+    }
+
+    .footer-section h3 {
+        font-size: 1.1rem; /* Slightly smaller headings */
+    }
+
+    .social-media {
+        gap: 8px;
+    }
+}

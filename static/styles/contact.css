@@ -1,0 +1,232 @@
+/* Reset styles for consistency */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+p{
+    color: white;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; /* Improve font rendering */
+    -moz-osx-font-smoothing: grayscale; /* Improve font rendering on Firefox */
+    overflow: hidden;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.home-nav {
+    display: -webkit-flex; /* Safari 6.1+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    flex-wrap: wrap;
+}
+
+.home-nav .nav-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-nav .nav-box .logo {
+    margin: 0;
+}
+
+
+
+.home-nav .nav-box .profile_pic {
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures image fits correctly inside the circle */
+}
+
+.home-nav .nav-box:nth-child(2) {
+    gap: 15px;
+}
+
+.home-nav .nav-box .nav-item {
+    padding: 8px 20px;
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.home-nav .nav-box .nav-item.selected {
+    background-color: #f0f0f0;
+    border-color: black;
+}
+
+.home-nav .nav-box .nav-item:hover {
+    background-color: #f0f0f0;
+    border-color: black;
+    transform: scale(1.1);
+}
+
+
+@media (max-width: 768px) {
+    .home-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 40px;
+        width: 40px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 15px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-nav {
+        padding: 5px 10px;
+    }
+
+    .home-nav .nav-box .profile_pic {
+        height: 35px;
+        width: 35px;
+    }
+
+    .home-nav .nav-box .nav-item {
+        padding: 10px 12px;
+        font-size: 1.4rem;
+    }
+}
+
+
+main{
+    height: calc(100vh - 85px);
+    display: flex;
+    background-color: #18182F;
+    overflow: hidden;
+}
+.left-Section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 45%;
+    height: fit-content;
+    color: #30363d;
+    margin: auto;
+}
+
+.left-Section h1{
+    color: white;
+}
+
+.left-Section p{
+    color: #93b2d6;
+}
+
+/* Buttons */
+button, .btn {
+    background-color: #6b46c1;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover, .btn:hover {
+    background-color: #4c2898;
+}
+
+/* Contact Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 40%;
+    min-height: 50vh;
+    background-color: #1A1B36;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #30363d;
+    background-color: #19192B;
+    color: white;
+}
+
+textarea {
+    height: 220px;
+}
+
+/* Sidebar Information */
+.info-box {
+    background-color: #161b22;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Social Icons */
+.social-icons a {
+    color: white;
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.social-icons a:hover {
+    color: #a5b4fc;
+}
+
+.location {
+    background-color: #1e1e2e; /* Dark background */
+    padding: 16px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.location div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.location i {
+    color: #4a90e2; /* Icon color */
+    font-size: 18px;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid {
+        display: block;
+    }
+
+    form, .info-box {
+        margin-bottom: 20px;
+    }
+}
