@@ -53,7 +53,7 @@ def user_login(request):
 
 def logoutView(request):
     logout(request)  # Logs out the current user
-    return redirect('home')
+    return redirect('login')
 
 def contact(request):
     return render(request, 'contact.html')
@@ -90,7 +90,9 @@ def contact_view(request):
 
             send_mail(subject, message, "pertinaxstudios@gmail.com", [email], fail_silently=False)
 
-            messages.success(request, "Your message has been sent successfully! A confirmation email has been sent to you.")
+            # Redirect to a success page or display a success message
+
+            messages = "Your message has been sent successfully! A confirmation email has been sent to you."
             return redirect("contact")  # Change "contact" to your actual URL name
 
     return render(request, "contact.html")
